@@ -1,0 +1,29 @@
+[
+   {
+      "name":"exchange_data_scraper",
+      "image":"925884611165.dkr.ecr.eu-west-1.amazonaws.com/exchange-data-scraper:latest",
+      "memory":4096,
+      "cpu":2048,
+      "essential":true,
+      "portMappings":[
+         {
+            "containerPort":1994,
+            "hostPort":1994
+         }
+      ],
+      "logConfiguration":{
+         "logDriver":"awslogs",
+         "options":{
+            "awslogs-group":"/aws/ecs/exchange_data_scraper",
+            "awslogs-region":"eu-west-1",
+            "awslogs-stream-prefix":"service"
+         }
+      },
+      "environmentFiles":[
+         {
+            "value":"arn:aws:s3:::singdao-config-prod/sdao_scrapers/exchange_data_scrapers/.env",
+            "type":"s3"
+         }
+      ]
+   }
+]

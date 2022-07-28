@@ -1,0 +1,15 @@
+version: 0.2
+phases:
+  install:
+    commands:
+     # - sudo npm install -g --unsafe-perm serverless 
+      - yarn
+  build:
+    commands:
+      - aws s3 sync s3://${config_bucket}/sdao-dapp/dev/ .
+      - yarn build
+      - serverless
+cache:
+  paths:
+    #- 'node_modules'
+    #- 'dist'

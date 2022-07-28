@@ -1,0 +1,33 @@
+[
+    {
+      "name": "dynaset_backend_server_uat",
+      "image": "377995165915.dkr.ecr.eu-west-1.amazonaws.com/dynaset-backend:latest",
+      "memory": 1024,
+      "cpu": 512,
+      "essential": true,
+      "portMappings": [
+        {
+          "containerPort": 3000,
+          "hostPort": 3000
+        }
+      ],
+
+     "logConfiguration": {
+              "logDriver": "awslogs",
+              "options": {
+                "awslogs-group": "/aws/ecs/dynaset_backend_server_uat",
+                "awslogs-region": "eu-west-1",
+                "awslogs-stream-prefix": "service"
+              }
+          },
+
+          "environmentFiles": [
+            {
+              "value": "arn:aws:s3:::singdao-config-uat/dynaset-backend/uat/.env",
+              "type": "s3"
+            }
+          ]
+
+
+    }
+  ]

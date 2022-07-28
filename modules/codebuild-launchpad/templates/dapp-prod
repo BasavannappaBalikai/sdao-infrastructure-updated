@@ -1,0 +1,19 @@
+version: 0.2
+phases:
+  install:
+    commands:
+      - npm install -g --unsafe-perm serverless@2.72.2
+      #- npm install -g @serverless/cli
+      - yarn
+      # - yarn add ./lib/sdao-ui
+  build:
+    commands:
+      - aws s3 sync s3://${config_bucket}/sdao-dapp/prod/ .
+      #- yarn build
+      - serverless
+cache:
+  paths:
+    #  - 'node_modules/**/*' # Cache `node_modules` for faster `yarn` or `npm i`
+    #  - '.next/cache/**/*' # Cache Next.js for faster application rebuilds
+    #  - 'yarn.lock'
+    #  - '.serverless/**/*'

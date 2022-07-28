@@ -1,0 +1,18 @@
+version: 0.2
+phases:
+  install:
+    commands:
+      - yarn
+  build:
+    commands:
+      - yarn build launchpad-api
+      - yarn serverless-config
+      - cd dist/apps/launchpad-api
+      - aws s3 sync s3://${config_bucket}/launchpad-backend/mainnet/ .
+      - npx serverless plugin install -n serverless-layers
+      - npx serverless plugin install -n serverless-offline
+      - npx serverless deploy --stage prod
+cache:
+  paths:
+    - 'node_modules'
+    - 'dist'

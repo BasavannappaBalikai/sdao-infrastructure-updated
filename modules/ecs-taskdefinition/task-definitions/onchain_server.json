@@ -1,0 +1,53 @@
+[
+  {
+    "name": "onchain_server",
+    "image": "925884611165.dkr.ecr.eu-west-1.amazonaws.com/onchain_server:latest",
+    "memory": 1024,
+    "cpu": 512,
+    "essential": true,
+    "portMappings": [
+      {
+        "containerPort": 3000,
+        "hostPort": 3000
+      }
+    ],
+
+   "logConfiguration": {
+            "logDriver": "awslogs",
+            "options": {
+              "awslogs-group": "/aws/ecs/onchain_server",
+              "awslogs-region": "eu-west-1",
+              "awslogs-stream-prefix": "service"
+            }
+        },
+
+        "environmentFiles": [
+          {
+            "value": "arn:aws:s3:::singdao-config-dev/onchain-server/ropsten/.env",
+            "type": "s3"
+          }
+        ],
+
+
+    "secrets": [
+      {
+        "name": "HDWALLET_MNEMONIC",
+        "valueFrom": "arn:aws:secretsmanager:eu-west-1:925884611165:secret:ROPSTEN_HDWALLET_MNEMONIC-EWhxBl:HDWALLET_MNEMONIC::"
+      },
+      {
+        "name": "PRIVATE_KEY_KOVAN",
+        "valueFrom": "arn:aws:secretsmanager:eu-west-1:925884611165:secret:ROPSTEN_KOVAN_PRIVATE_KEY-xxQCMc:PRIVATE_KEY_KOVAN::"
+      },
+      {
+        "name": "DYNASET",
+        "valueFrom": "arn:aws:secretsmanager:eu-west-1:925884611165:secret:ROPSTEN_DYNASET_KEY-8ll5r5:DYNASET::"
+      },
+      {
+        "name": "InfuraKey",
+        "valueFrom": "arn:aws:secretsmanager:eu-west-1:925884611165:secret:ROPSTEN_INFURAKEY-fEwdil:InfuraKey::"
+      }
+
+
+    ]
+  }
+]

@@ -1,0 +1,17 @@
+version: 0.2
+phases:
+  install:
+    commands:
+      - sudo apt-get install curl -y
+      - curl -sL https://deb.nodesource.com/setup_12.x | sudo -E bash -
+      - sudo apt install nodejs
+      - npm install -g serverless
+  build:
+    commands:
+      - npm i
+      - sls deploy --stage prod
+
+#cache:
+#  paths:
+#    - 'node_modules'
+#    - 'dist'

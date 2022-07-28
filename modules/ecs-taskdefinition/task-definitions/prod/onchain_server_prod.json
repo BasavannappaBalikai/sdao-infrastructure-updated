@@ -1,0 +1,41 @@
+[
+  {
+    "name": "onchain_server_prod",
+    "image": "925884611165.dkr.ecr.eu-west-1.amazonaws.com/onchain_server:latest",
+    "memory": 1024,
+    "cpu": 512,
+    "essential": true,
+    "portMappings": [
+      {
+        "containerPort": 3000,
+        "hostPort": 3000
+      }
+    ],
+
+   "logConfiguration": {
+            "logDriver": "awslogs",
+            "options": {
+              "awslogs-group": "/aws/ecs/onchain_server_prod",
+              "awslogs-region": "eu-west-1",
+              "awslogs-stream-prefix": "service"
+            }
+        },
+
+        "environmentFiles": [
+          {
+            "value": "arn:aws:s3:::singdao-config-prod/onchain_server/mainnet/.env",
+            "type": "s3"
+          }
+        ],
+
+
+    "secrets": [
+
+      {
+        "name": "TRADING_MAINNET_TEST",
+        "valueFrom": "arn:aws:secretsmanager:eu-west-1:925884611165:secret:TRADING_MAINNET_TEST-hW3zyT:TRADING_MAINNET_TEST::"
+      }
+
+    ]
+  }
+]

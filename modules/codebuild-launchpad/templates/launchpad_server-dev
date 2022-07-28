@@ -1,0 +1,22 @@
+version: 0.2
+phases:
+  install:
+    commands:
+      - aws codeartifact login --tool npm --repository singularitydao-npm-pypi-registry --domain singularitydao --domain-owner 925884611165
+      - yarn
+  build:
+    commands:
+      - yarn build launchpad-api
+      - cp config/serverless/launchpad-api.yml dist/apps/launchpad-api/serverless.yml
+     # - yarn serverless-config
+      - cd dist/apps/launchpad-api
+      - aws s3 sync s3://${config_bucket}/launchpad-backend/ropsten/ .
+      - mv production.env .env
+
+      - npx serverless plugin install -n serverless-layers
+      - npx serverless plugin install -n serverless-offline
+      - npx serverless deploy --stage dev
+cache:
+  paths:
+    - 'node_modules'
+    - 'dist'

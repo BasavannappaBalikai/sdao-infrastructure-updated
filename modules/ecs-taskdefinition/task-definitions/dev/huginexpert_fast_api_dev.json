@@ -1,0 +1,31 @@
+[
+    {
+      "name": "huginexpert_fast_api_dev",
+      "image": "925884611165.dkr.ecr.eu-west-1.amazonaws.com/huginexpert-fast-api:latest",
+      "memory": 1024,
+      "cpu": 512,
+      "essential": true,
+      "portMappings": [
+        {
+          "containerPort": 49000,
+          "hostPort": 49000
+        }
+      ],
+
+     "logConfiguration": {
+              "logDriver": "awslogs",
+              "options": {
+                "awslogs-group": "/aws/ecs/huginexpert-fast-api_dev",
+                "awslogs-region": "eu-west-1",
+                "awslogs-stream-prefix": "service"
+              }
+          },
+      "environmentFiles":[
+             {
+                "value":"arn:aws:s3:::singdao-config-dev/huginexpert-fast-api/.env",
+                "type":"s3"
+             }
+          ]
+
+    }
+  ]

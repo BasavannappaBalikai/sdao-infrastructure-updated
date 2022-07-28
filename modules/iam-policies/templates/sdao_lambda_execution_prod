@@ -1,0 +1,42 @@
+{
+    "Version": "2012-10-17",
+    "Statement": [
+        {
+            "Sid": "VisualEditor0",
+            "Effect": "Allow",
+            "Action": [
+                "s3:*",
+                "apigateway:*",
+                "lambda:InvokeFunction",
+                "ec2:DeleteNetworkInterface",
+                "sqs:*",
+                "ec2:AssignPrivateIpAddresses",
+                "logs:CreateLogGroup",
+                "logs:PutLogEvents",
+                "ec2:CreateNetworkInterface",
+                "logs:CreateLogStream",
+                "cloudfront:*",
+                "sns:Publish",
+                "ec2:DescribeNetworkInterfaces",
+                "ssm:*",
+                "ec2:UnassignPrivateIpAddresses"
+            ],
+            "Resource": "*"
+        },
+        {
+            "Sid": "VisualEditor1",
+            "Effect": "Allow",
+            "Action": [
+                "secretsmanager:GetResourcePolicy",
+                "secretsmanager:GetSecretValue",
+                "secretsmanager:DescribeSecret",
+                "s3:GetBucketLocation",
+                "secretsmanager:ListSecretVersionIds"
+            ],
+            "Resource": [
+                "arn:aws:secretsmanager:eu-west-1:925884611165:secret:MAINNET_VERIFY_PRIVATE_KEY-4M5nbB",
+                "arn:aws:s3:::singdao-config-prod"
+            ]
+        }
+    ]
+}

@@ -1,0 +1,25 @@
+[
+    {
+       "name":"unbounded_erc_scraper_dev",
+       "image":"925884611165.dkr.ecr.eu-west-1.amazonaws.com/unbounded_erc_scraper:latest",
+       "memory":1024,
+       "cpu":512,
+       "essential":true,
+       "portMappings":[
+          {
+             "containerPort":4003,
+             "hostPort":4003
+          }
+       ],
+       "logConfiguration":{
+          "logDriver":"awslogs",
+          "options":{
+             "awslogs-group":"/aws/ecs/unbounded_erc_scraper_dev",
+             "awslogs-region":"eu-west-1",
+             "awslogs-stream-prefix":"service"
+          }
+       }
+
+    }
+ ]
+ 

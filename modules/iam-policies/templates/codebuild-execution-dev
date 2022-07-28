@@ -1,0 +1,95 @@
+{
+    "Version": "2012-10-17",
+    "Statement": [
+        {
+            "Sid": "VisualEditor0",
+            "Effect": "Allow",
+            "Action": [
+                "cloudformation:DescribeStackDriftDetectionStatus",
+                "logs:GetLogRecord",
+                "logs:*",
+                "cloudformation:DescribeStackResource",
+                "cloudformation:UpdateStackSet",
+                "logs:GetLogDelivery",
+                "logs:ListLogDeliveries",
+                "ecs:UpdateService",
+                "logs:DeleteResourcePolicy",
+                "iam:PassRole",
+                "cloudformation:DescribeStackEvents",
+                "kms:*",
+                "ecs:RegisterTaskDefinition",
+                "logs:CancelExportTask",
+                "codedeploy:*",
+                "cloudformation:UpdateStack",
+                "logs:DeleteLogDelivery",
+                "cloudformation:DescribeChangeSet",
+                "events:*",
+                "logs:PutDestination",
+                "logs:DescribeResourcePolicies",
+                "logs:DescribeDestinations",
+                "cloudformation:ListStackResources",
+                "logs:DescribeQueries",
+                "iam:GetRole",
+                "codepipeline:StartPipelineExecution",
+                "apigateway:*",
+                "s3:*",
+                "logs:PutDestinationPolicy",
+                "cloudformation:*",
+                "logs:StopQuery",
+                "logs:TestMetricFilter",
+                "logs:DeleteDestination",
+                "ssm:DescribeParameters",
+                "ssm:GetParameter",
+                "logs:CreateLogGroup",
+                "cloudformation:DescribeStacks",
+                "logs:CreateLogDelivery",
+                "logs:PutResourcePolicy",
+                "logs:DescribeExportTasks",
+                "logs:GetQueryResults",
+                "cloudformation:CreateStack",
+                "logs:UpdateLogDelivery",
+                "lambda:*",
+                "ecr:*",
+                "ec2:*",
+                "codebuild:StartBuild",
+                "cloudformation:ValidateTemplate"
+            ],
+            "Resource": "*"
+        },
+        {
+            "Effect": "Allow",
+            "Action": [
+                "codeartifact:GetAuthorizationToken",
+                "codeartifact:GetRepositoryEndpoint",
+                "codeartifact:ReadFromRepository",
+                "codeartifact:PublishPackageVersion"
+            ],
+            "Resource": "*"
+        },
+        {
+            "Effect": "Allow",
+            "Action": [
+                "iam:CreateRole",
+                "iam:PutRolePolicy"
+            ],
+            "Resource": "*"
+        },
+        {
+            "Effect": "Allow",
+            "Action": [
+                "cloudfront:CreateInvalidation"
+            ],
+            "Resource": "*"
+        },
+        {
+            "Effect": "Allow",
+            "Action": "sts:GetServiceBearerToken",
+            "Resource": "*",
+            "Condition": {
+                "StringEquals": {
+                    "sts:AWSServiceName": "codeartifact.amazonaws.com"
+                }
+            }
+        }
+    ]
+}

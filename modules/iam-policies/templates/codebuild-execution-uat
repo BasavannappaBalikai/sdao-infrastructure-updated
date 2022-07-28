@@ -1,0 +1,91 @@
+{
+    "Version": "2012-10-17",
+    "Statement": [
+        {
+            "Sid": "VisualEditor0",
+            "Effect": "Allow",
+            "Action": [
+                "logs:GetLogRecord",
+                "logs:*",
+                "iam:CreateRole",
+                "cloudformation:DescribeStackResource",
+                "iam:PutRolePolicy",
+                "cloudformation:UpdateStackSet",
+                "cloudfront:CreateInvalidation",
+                "ssm:GetParameter",
+                "logs:ListLogDeliveries",
+                "cloudfront:GetDistribution",
+                "ecs:UpdateService",
+                "cloudformation:DescribeStackEvents",
+                "logs:CancelExportTask",
+                "ecs:RegisterTaskDefinition",
+                "cloudformation:UpdateStack",
+                "cloudfront:GetDistributionConfig",
+                "cloudformation:DescribeChangeSet",
+                "events:*",
+                "logs:DescribeDestinations",
+                "cloudformation:ListStackResources",
+                "iam:GetRole",
+                "codepipeline:StartPipelineExecution",
+                "apigateway:*",
+                "cloudfront:TagResource",
+                "cloudformation:*",
+                "logs:StopQuery",
+                "ssm:GetParameters",
+                "logs:CreateLogGroup",
+                "cloudformation:DescribeStacks",
+                "logs:CreateLogDelivery",
+                "logs:PutResourcePolicy",
+                "logs:DescribeExportTasks",
+                "logs:GetQueryResults",
+                "logs:UpdateLogDelivery",
+                "ec2:*",
+                "codebuild:StartBuild",
+                "codeartifact:PublishPackageVersion",
+                "cloudformation:ValidateTemplate",
+                "cloudformation:DescribeStackDriftDetectionStatus",
+                "logs:GetLogDelivery",
+                "cloudfront:CreateCloudFrontOriginAccessIdentity",
+                "iam:PassRole",
+                "logs:DeleteResourcePolicy",
+                "kms:*",
+                "codeartifact:GetAuthorizationToken",
+                "codeartifact:ReadFromRepository",
+                "codedeploy:*",
+                "logs:DeleteLogDelivery",
+                "cloudfront:UpdateDistribution",
+                "ssm:GetParametersByPath",
+                "logs:PutDestination",
+                "logs:DescribeResourcePolicies",
+                "logs:DescribeQueries",
+                "s3:*",
+                "logs:PutDestinationPolicy",
+                "logs:TestMetricFilter",
+                "logs:DeleteDestination",
+                "cloudfront:CreateDistribution",
+                "cloudformation:CreateStack",
+                "lambda:*",
+                "codeartifact:GetRepositoryEndpoint",
+                "ecr:*"
+            ],
+            "Resource": "*"
+        },
+        {
+            "Sid": "VisualEditor12",
+            "Effect": "Allow",
+            "Action": "sts:AssumeRole",
+            "Resource": "arn:aws:iam::925884611165:role/singularitydao-npm-pypi-read-role"
+        },
+        {
+            "Sid": "VisualEditor1",
+            "Effect": "Allow",
+            "Action": "sts:GetServiceBearerToken",
+            "Resource": "*",
+            "Condition": {
+                "StringEquals": {
+                    "sts:AWSServiceName": "codeartifact.amazonaws.com"
+                }
+            }
+        }
+    ]
+}

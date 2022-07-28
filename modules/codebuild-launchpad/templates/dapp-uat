@@ -1,0 +1,34 @@
+version: 0.2
+phases:
+  install:
+    commands:
+      - apt-get update
+      - apt-get -y install jq
+      - npm install -g --unsafe-perm serverless@2.72.2
+      - pip3 install awscli --upgrade --user
+      - ASSUME_ROLE_ARN="arn:aws:iam::925884611165:role/singularitydao-npm-pypi-read-role"
+      - TEMP_ROLE=$(aws sts assume-role --role-arn $ASSUME_ROLE_ARN --role-session-name test)
+      - export TEMP_ROLE
+      - export AWS_ACCESS_KEY_ID=$(echo "${TEMP_ROLE}" | jq -r '.Credentials.AccessKeyId')
+      - export AWS_SECRET_ACCESS_KEY=$(echo "${TEMP_ROLE}" | jq -r '.Credentials.SecretAccessKey')
+      - export AWS_SESSION_TOKEN=$(echo "${TEMP_ROLE}" | jq -r '.Credentials.SessionToken')
+      - aws codeartifact login --tool npm --repository singularitydao-npm-pypi-registry --domain singularitydao --domain-owner 925884611165
+      #- npm install -g @serverless/cli
+      - yarn
+      - yarn add ./lib/sdao-ui
+  pre_build:
+    commands:
+      - unset AWS_ACCESS_KEY_ID
+      - unset AWS_SECRET_ACCESS_KEY
+      - unset AWS_SESSION_TOKEN
+  build:
+    commands:
+      - aws s3 sync s3://${config_bucket}/sdao-dapp/uat/ .
+      #- yarn build
+      - serverless
+cache:
+  paths:
+      - 'node_modules/**/*' # Cache `node_modules` for faster `yarn` or `npm i`
+      - '.next/cache/**/*' # Cache Next.js for faster application rebuilds
+      - 'yarn.lock'
+      - '.serverless/**/*'

@@ -1,0 +1,24 @@
+[
+    {
+       "name":"lp_sdao_usd_scraper_dev",
+       "image":"925884611165.dkr.ecr.eu-west-1.amazonaws.com/lp_sdao_usd_scraper:latest",
+       "memory":1024,
+       "cpu":512,
+       "essential":true,
+       "portMappings":[
+          {
+             "containerPort":4007,
+             "hostPort":4007
+          }
+       ],
+       "logConfiguration":{
+          "logDriver":"awslogs",
+          "options":{
+             "awslogs-group":"/aws/ecs/lp_sdao_usd_scraper_dev",
+             "awslogs-region":"eu-west-1",
+             "awslogs-stream-prefix":"service"
+          }
+       }
+
+    }
+ ]

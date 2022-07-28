@@ -1,0 +1,25 @@
+version: 0.2
+phases:
+  install:
+    commands:
+      - aws --version
+     # - yarn install
+  pre_build:
+    commands:
+      #- cd sdao-monorepo
+      - yarn
+      #- yarn
+  build:
+    commands:
+      - aws s3 cp s3://${config_bucket}/launchpad-admin/prod/.env .
+      - NODE_ENV=development yarn build sdao-ui
+      - NODE_ENV=production yarn build launchpad-admin
+      - cd dist/apps/launchpad-admin
+      #- ls -ltrh
+      - aws s3 sync . s3://${target_bucket}/
+      #- aws cloudfront create-invalidation --distribution-id E81163PIS299W  --paths "/*"
+
+cache:
+  paths:
+    - 'node_modules'
+    - 'dist'

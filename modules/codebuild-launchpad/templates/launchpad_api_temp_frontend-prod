@@ -1,0 +1,28 @@
+version: 0.2
+phases:
+  install:
+    commands:
+      - aws --version
+     # - yarn install
+  pre_build:
+    commands:
+      - pip3 install awscli --upgrade --user
+      - aws codeartifact login --tool npm --repository singularitydao-npm-pypi-registry --domain singularitydao --domain-owner 925884611165
+      #- cd sdao-monorepo
+      - NODE_ENV=development yarn
+      #- aws s3 cp s3://${config_bucket}/launchpad-frontend/dev/.env .
+      #- yarn
+  build:
+    commands:
+      - aws s3 cp s3://${config_bucket}/launchpad-frontend-temp/prod/.env .
+      - NODE_ENV=development yarn build sdao-ui
+      - NODE_ENV=production yarn build launchpad-frontend
+      - cd dist/apps/launchpad-frontend
+      #- ls -ltrh
+      - aws s3 sync . s3://${target_bucket}/
+      - aws cloudfront create-invalidation --distribution-id E1G7EB7MOQF504  --paths "/*"
+
+cache:
+  paths:
+    - 'node_modules/'
+    - 'dist/'

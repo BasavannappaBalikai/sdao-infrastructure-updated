@@ -1,0 +1,29 @@
+[
+   {
+      "name":"binance_scraper_dev",
+      "image":"925884611165.dkr.ecr.eu-west-1.amazonaws.com/sdao-scrapers:latest",
+      "memory":1024,
+      "cpu":512,
+      "essential":true,
+      "portMappings":[
+         {
+            "containerPort":1990,
+            "hostPort":1990
+         }
+      ],
+      "logConfiguration":{
+         "logDriver":"awslogs",
+         "options":{
+            "awslogs-group":"/aws/ecs/binance_scraper_dev",
+            "awslogs-region":"eu-west-1",
+            "awslogs-stream-prefix":"service"
+         }
+      },
+      "environmentFiles":[
+         {
+            "value":"arn:aws:s3:::singdao-config-dev/sdao_scrapers/.env",
+            "type":"s3"
+         }
+      ]
+   }
+]

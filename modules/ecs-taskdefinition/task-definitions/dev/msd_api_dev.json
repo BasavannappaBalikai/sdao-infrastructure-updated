@@ -1,0 +1,31 @@
+[
+    {
+      "name": "msd_api_dev",
+      "image": "925884611165.dkr.ecr.eu-west-1.amazonaws.com/msd_fastapi:latest",
+      "memory": 1024,
+      "cpu": 512,
+      "essential": true,
+      "portMappings": [
+        {
+          "containerPort": 8100,
+          "hostPort": 8100
+        }
+      ],
+
+     "logConfiguration": {
+              "logDriver": "awslogs",
+              "options": {
+                "awslogs-group": "/aws/ecs/msd_api_dev",
+                "awslogs-region": "eu-west-1",
+                "awslogs-stream-prefix": "service"
+              }
+          },
+      "environmentFiles":[
+             {
+                "value":"arn:aws:s3:::singdao-config-dev/msd-api/.env",
+                "type":"s3"
+             }
+          ]
+
+    }
+  ]

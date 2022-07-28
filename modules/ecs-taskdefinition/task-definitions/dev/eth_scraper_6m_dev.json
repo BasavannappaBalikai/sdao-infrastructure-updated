@@ -1,0 +1,33 @@
+[
+    {
+      "name": "eth_scraper_6m_dev",
+      "image": "925884611165.dkr.ecr.eu-west-1.amazonaws.com/eth-scraper-6m",
+      "memory": 1024,
+      "cpu": 512,
+      "essential": true,
+      "portMappings": [
+        {
+          "containerPort": 9002,
+          "hostPort": 9002
+        }
+      ],
+
+     "logConfiguration": {
+              "logDriver": "awslogs",
+              "options": {
+                "awslogs-group": "/aws/ecs/eth_scraper_6m_dev",
+                "awslogs-region": "eu-west-1",
+                "awslogs-stream-prefix": "service"
+              }
+          },
+
+          "environmentFiles": [
+            {
+              "value": "arn:aws:s3:::singdao-config-dev/eth_scraper_6m/.env",
+              "type": "s3"
+            }
+          ]
+
+
+    }
+  ]
